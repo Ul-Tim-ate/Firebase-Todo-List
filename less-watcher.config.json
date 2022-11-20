@@ -1,6 +1,6 @@
 {
-  "watchFolder": "src/",
-  "outputFolder": "src/",
+  "watchFolder": "src/components",
+  "outputFolder": "src/css",
   "sourceMap": true,
   "runOnce": false,
   "enableJs": true
