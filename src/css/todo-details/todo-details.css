@@ -1,0 +1,45 @@
+.todo-details {
+  background-color: white;
+  border-radius: 20px;
+  width: 500px;
+  padding: 20px;
+  position: relative;
+}
+.todo-details__header {
+  font-size: 23px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.todo-details__desc {
+  font-size: 19px;
+  margin-bottom: 20px;
+}
+.todo-details__finished {
+  display: block;
+  font-size: 19px;
+  margin-bottom: 20px;
+}
+.todo-details__label {
+  display: block;
+  font-size: 15px;
+  font-style: italic;
+  margin-bottom: 5px;
+}
+.todo-details__files {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  row-gap: 10px;
+}
+.todo-details__file {
+  width: 100px;
+  height: 100px;
+  background-color: black;
+}
+.todo-details__rewrite {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+/*# sourceMappingURL=todo-details.css.map */
