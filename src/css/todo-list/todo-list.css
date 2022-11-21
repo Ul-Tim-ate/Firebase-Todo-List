@@ -1,0 +1,4 @@
+.todo-list > li:not(:last-child) {
+  margin-bottom: 10px;
+}
+/*# sourceMappingURL=todo-list.css.map */

@@ -1,4 +1,14 @@
 .auth {
-  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.auth__btn {
+  color: #2d2d2d;
+  border: 2px solid #432b2b;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 10px;
 }
 /*# sourceMappingURL=auth.css.map */
