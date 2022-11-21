@@ -6,4 +6,11 @@
   width: 1000px;
   margin: 0 auto;
 }
+.app__loading {
+  height: 100%;
+  background-color: #f0d3d3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /*# sourceMappingURL=App.css.map */
