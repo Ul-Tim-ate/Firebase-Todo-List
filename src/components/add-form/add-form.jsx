@@ -19,15 +19,20 @@ const AddForm = () => {
         <label htmlFor="desc" className="add-form__label-textarea">
           Описание
         </label>
-        <textarea id="desc" className="add-form__textarea" />
+        <textarea id="desc" className="add-form__textarea" name="description" />
       </div>
       <div className="add-form__field">
         <label htmlFor="finished-date" className="add-form__label">
           Дата завершения
         </label>
-        <input type="date" id="finished-date" className="add-form__input" />
+        <input
+          type="date"
+          id="finished-date"
+          name="finished-date"
+          className="add-form__input"
+        />
       </div>
-      <input type="file" />
+      <input type="file" multiple name="files" />
       <button className="add-form__btn">Создать todo</button>
     </form>
   );
