@@ -1,13 +1,13 @@
 .app {
-  height: 100%;
+  min-height: 100vh;
   background-color: #f0d3d3;
 }
 .container {
-  width: 1000px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 .app__loading {
-  height: 100%;
+  min-height: 100vh;
   background-color: #f0d3d3;
   display: flex;
   justify-content: center;

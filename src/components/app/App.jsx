@@ -1,5 +1,5 @@
 import Auth from "../auth/auth";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "../../css/app/App.css";
 import "../../css/app/reset.css";
 import TodoPage from "../todo-page/todo-page";
@@ -8,11 +8,9 @@ import Spinner from "../spinner/spinner";
 
 function App() {
   const auth = getAuth();
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   onAuthStateChanged(auth, (user) => {
-    console.log(user);
-
     if (user) {
       setUser(user.uid);
       setIsLoading(false);
