@@ -1,12 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "../../css/todo-item/todo-item.css";
-import { SelectedTodoContext } from "../todo-page/todo-page";
+import trash from "./trash.svg";
 
-const TodoItem = ({ todoName, index, set }) => {
-  const context = useContext(SelectedTodoContext);
+const TodoItem = ({ todoName, id, deleteTodo }) => {
+  const [done, setDone] = useState(false);
   return (
-    <li className="todo-item" onClick={()=> set(index)}>
-      {todoName}
+    <li className="todo-item">
+      <span
+        className="todo-item__info"
+        onClick={() => console.log("todo-item")}
+      >
+        {todoName}
+      </span>
+      <img
+        src={trash}
+        alt="Удалить todo"
+        className="todo-item__delete"
+        onClick={() => {
+          deleteTodo(id);
+        }}
+      />
     </li>
   );
 };
