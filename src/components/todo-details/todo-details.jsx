@@ -17,9 +17,6 @@ const TodoDetails = () => {
         <li className="todo-details__file"></li>
         <li className="todo-details__file"></li>
         <li className="todo-details__file"></li>
-        <li className="todo-details__file"></li>
-        <li className="todo-details__file"></li>
-        <li className="todo-details__file"></li>
       </ul>
       <button className="todo-details__rewrite">
         <img src={iconRewrite} alt="" />
