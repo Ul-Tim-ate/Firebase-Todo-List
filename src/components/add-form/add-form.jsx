@@ -4,21 +4,34 @@ import { DbContext } from "../..";
 import "../../css/add-form/add-form.css";
 import { ref, uploadBytes } from "firebase/storage";
 import { getAuth } from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore";
 
 const AddForm = () => {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [finishedDate, setFinishedDate] = useState(dayjs());
   const [files, setFiles] = useState([]);
-  const storage = useContext(DbContext);
+  const { storage, db } = useContext(DbContext);
 
-  const sumbit = (e) => {
+  const sumbit = async (e) => {
     e.preventDefault();
-    files.forEach((file) => {
-      
-      const name = file.name;
+    let docRef;
+    try {
+      docRef = await addDoc(collection(db, "todos"), {
+        name: name,
+        description: desc,
+        finishedDate: finishedDate.format("YYYY-MM-DD"),
+        userId: getAuth().currentUser.uid,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+
+    Array.from(files).forEach((file) => {
+      const fileName = file.name;
       const userId = getAuth().currentUser.uid;
-      const path = userId + "/" + name;
+      const path = userId + "/" + docRef.id + "/" + fileName;
       const storageRef = ref(storage, path);
 
       uploadBytes(storageRef, file).then((snapshot) => {

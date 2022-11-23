@@ -22,7 +22,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <DbContext.Provider value={storage}>
+    <DbContext.Provider value={{ storage, db }}>
       <App />
     </DbContext.Provider>
   </React.StrictMode>
