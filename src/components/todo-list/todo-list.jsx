@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../../css/todo-list/todo-list.css";
 import TodoItem from "../todo-item/todo-item";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import { DbContext } from "../..";
 import { getAuth } from "firebase/auth";
 import Spinner from "../spinner/spinner";
@@ -29,7 +29,8 @@ const TodoList = ({ selectedTodo, setTodos, todos }) => {
     getData();
   }, []);
 
-  const deleteTodo = (id) => {
+  const deleteTodo = async (id) => {
+    await deleteDoc(doc(db, "todos", id));
     const idx = todos.findIndex((el) => el.id === id);
     const newTodos = [...todos.slice(0, idx), ...todos.slice(idx + 1)];
     setTodos(newTodos);
