@@ -13,12 +13,16 @@ const TodoPage = () => {
       <div className="container">
         <div className="todo-page__btn"></div>
         <div className="todo-page__row ">
-          <TodoList set={setSelectedTodo} />
-          {/* <div className="todo-page__placeholder">
+          <TodoList selectedTodo={setSelectedTodo} />
+          {selectedTodo ? (
+            <TodoDetails />
+          ) : (
+            <div className="todo-page__placeholder">
               Выберите вашу задачу или создайте новую
-            </div> */}
+            </div>
+          )}
+
           <AddForm />
-          <TodoDetails />
         </div>
       </div>
     </>

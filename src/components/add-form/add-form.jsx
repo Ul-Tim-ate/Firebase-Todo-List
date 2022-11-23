@@ -1,9 +1,35 @@
-import React from "react";
+import dayjs from "dayjs";
+import React, { useContext, useState } from "react";
+import { DbContext } from "../..";
 import "../../css/add-form/add-form.css";
+import { ref, uploadBytes } from "firebase/storage";
+import { getAuth } from "firebase/auth";
 
 const AddForm = () => {
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
+  const [finishedDate, setFinishedDate] = useState(dayjs());
+  const [files, setFiles] = useState([]);
+  const storage = useContext(DbContext);
+
+  const sumbit = (e) => {
+    e.preventDefault();
+    files.forEach((file) => {
+      
+      const name = file.name;
+      const userId = getAuth().currentUser.uid;
+      const path = userId + "/" + name;
+      const storageRef = ref(storage, path);
+
+      uploadBytes(storageRef, file).then((snapshot) => {
+        console.log(snapshot);
+        console.log("download");
+      });
+    });
+  };
+
   return (
-    <form className="add-form">
+    <form className="add-form" onSubmit={(e) => sumbit(e)}>
       <div className="add-form__field">
         <label htmlFor="header" className="add-form__label">
           Название
@@ -13,13 +39,25 @@ const AddForm = () => {
           id="header"
           className="add-form__input"
           name="header"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
         />
       </div>
       <div className="add-form__field">
         <label htmlFor="desc" className="add-form__label-textarea">
           Описание
         </label>
-        <textarea id="desc" className="add-form__textarea" name="description" />
+        <textarea
+          id="desc"
+          className="add-form__textarea"
+          name="description"
+          value={desc}
+          onChange={(e) => {
+            setDesc(e.target.value);
+          }}
+        />
       </div>
       <div className="add-form__field">
         <label htmlFor="finished-date" className="add-form__label">
@@ -30,9 +68,18 @@ const AddForm = () => {
           id="finished-date"
           name="finished-date"
           className="add-form__input"
+          value={finishedDate.format("YYYY-MM-DD")}
+          onChange={(e) => setFinishedDate(dayjs(e.target.value))}
         />
       </div>
-      <input type="file" multiple name="files" />
+      <input
+        type="file"
+        multiple
+        name="files"
+        onChange={(e) => {
+          setFiles(e.target.files);
+        }}
+      />
       <button className="add-form__btn">Создать todo</button>
     </form>
   );

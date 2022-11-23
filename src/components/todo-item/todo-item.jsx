@@ -2,14 +2,11 @@ import React, { useContext, useState } from "react";
 import "../../css/todo-item/todo-item.css";
 import trash from "./trash.svg";
 
-const TodoItem = ({ todoName, id, deleteTodo }) => {
+const TodoItem = ({ todoName, id, deleteTodo, selectedTodo }) => {
   const [done, setDone] = useState(false);
   return (
     <li className="todo-item">
-      <span
-        className="todo-item__info"
-        onClick={() => console.log("todo-item")}
-      >
+      <span className="todo-item__info" onClick={() => selectedTodo(id)}>
         {todoName}
       </span>
       <img

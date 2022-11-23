@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "../../css/todo-list/todo-list.css";
 import TodoItem from "../todo-item/todo-item";
 
-const TodoList = () => {
+const TodoList = ({ selectedTodo }) => {
   const [todos, setTodos] = useState([
     { todoName: "Сходить в магазин", id: 1, key: 1 },
     { todoName: "Купить кофе", id: 2, key: 2 },
@@ -19,7 +19,13 @@ const TodoList = () => {
   return (
     <ul className="todo-list">
       {todos.map((todo) => {
-        return <TodoItem {...todo} deleteTodo={deleteTodo} />;
+        return (
+          <TodoItem
+            {...todo}
+            deleteTodo={deleteTodo}
+            selectedTodo={selectedTodo}
+          />
+        );
       })}
     </ul>
   );
