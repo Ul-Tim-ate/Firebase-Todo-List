@@ -6,8 +6,7 @@ import { DbContext } from "../..";
 import { getAuth } from "firebase/auth";
 import Spinner from "../spinner/spinner";
 
-const TodoList = ({ selectedTodo }) => {
-  const [todos, setTodos] = useState([]);
+const TodoList = ({ selectedTodo, setTodos, todos }) => {
   const [isLoading, setIsLoading] = useState(true);
   const { db } = useContext(DbContext);
   const user = getAuth();
@@ -42,7 +41,7 @@ const TodoList = ({ selectedTodo }) => {
 
   return (
     <ul className="todo-list">
-      {todos.map((todo) => {
+      {Array.from(todos).map((todo) => {
         return (
           <TodoItem
             {...todo}

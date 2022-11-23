@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./components/app/App";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getStorage, ref } from "firebase/storage";
+import { getStorage } from "firebase/storage";
 
 const app = initializeApp({
   apiKey: "AIzaSyBYGOUoHh4rMUnVwdypcWtjesE8l3DQJFc",

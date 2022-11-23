@@ -7,13 +7,19 @@ import AddForm from "../add-form/add-form";
 
 const TodoPage = () => {
   const [selectedTodo, setSelectedTodo] = useState(null);
+  const [todos, setTodos] = useState([]);
+
   return (
     <>
       <Header />
       <div className="container">
         <div className="todo-page__btn"></div>
         <div className="todo-page__row ">
-          <TodoList selectedTodo={setSelectedTodo} />
+          <TodoList
+            selectedTodo={setSelectedTodo}
+            setTodos={setTodos}
+            todos={todos}
+          />
           {selectedTodo ? (
             <TodoDetails />
           ) : (
@@ -21,7 +27,7 @@ const TodoPage = () => {
               Выберите вашу задачу или создайте новую
             </div>
           )}
-          <AddForm />
+          <AddForm setTodos={setTodos} todos={todos} />
         </div>
       </div>
     </>

@@ -6,7 +6,7 @@ import { ref, uploadBytes } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 
-const AddForm = () => {
+const AddForm = ({ setTodos, todos }) => {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [finishedDate, setFinishedDate] = useState(dayjs());
@@ -23,11 +23,10 @@ const AddForm = () => {
         finishedDate: finishedDate.format("YYYY-MM-DD"),
         userId: getAuth().currentUser.uid,
       });
-      console.log("Document written with ID: ", docRef.id);
+      setTodos([...todos, { name, id: docRef.id }]);
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-
     Array.from(files).forEach((file) => {
       const fileName = file.name;
       const userId = getAuth().currentUser.uid;
