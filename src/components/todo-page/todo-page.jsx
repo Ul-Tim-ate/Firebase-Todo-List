@@ -21,7 +21,7 @@ const TodoPage = () => {
             todos={todos}
           />
           {selectedTodo ? (
-            <TodoDetails />
+            <TodoDetails selectedTodo={selectedTodo} />
           ) : (
             <div className="todo-page__placeholder">
               Выберите вашу задачу или создайте новую

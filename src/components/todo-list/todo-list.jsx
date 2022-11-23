@@ -29,8 +29,8 @@ const TodoList = ({ selectedTodo, setTodos, todos }) => {
     getData();
   }, []);
 
-  const deleteTodo = async (id) => {
-    await deleteDoc(doc(db, "todos", id));
+  const deleteTodo = (id) => {
+    deleteDoc(doc(db, "todos", id));
     const idx = todos.findIndex((el) => el.id === id);
     const newTodos = [...todos.slice(0, idx), ...todos.slice(idx + 1)];
     setTodos(newTodos);

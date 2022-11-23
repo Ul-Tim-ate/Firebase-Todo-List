@@ -6,7 +6,12 @@ const TodoItem = ({ name, id, deleteTodo, selectedTodo }) => {
   const [done, setDone] = useState(false);
   return (
     <li className="todo-item">
-      <span className="todo-item__info" onClick={() => selectedTodo(id)}>
+      <span
+        className="todo-item__info"
+        onClick={() => {
+          selectedTodo(id);
+        }}
+      >
         {name}
       </span>
       <img
