@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { initDB, initStorage } from "../..";
 import "../../css/add-form/add-form.css";
 
-const AddForm = ({ setTodos, todos }) => {
+const AddForm = ({ setTodos }) => {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [finishedDate, setFinishedDate] = useState(dayjs());
@@ -11,9 +11,12 @@ const AddForm = ({ setTodos, todos }) => {
 
   const sumbit = async (e) => {
     e.preventDefault();
+    
     initDB.addTodo(name, desc, finishedDate).then((docRef) => {
       initStorage.uploadFiles(files, docRef.id);
-      setTodos([...todos, { name, id: docRef.id }]);
+      setTodos((todos) => {
+        return [...todos, { name, id: docRef.id, done: false }];
+      });
     });
   };
 
@@ -64,7 +67,6 @@ const AddForm = ({ setTodos, todos }) => {
       <input
         type="file"
         multiple
-        name="files"
         onChange={(e) => {
           setFiles(e.target.files);
         }}

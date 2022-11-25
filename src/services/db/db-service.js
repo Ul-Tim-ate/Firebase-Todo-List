@@ -5,6 +5,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 import authService from "../auth/auth-service";
 
@@ -18,8 +19,8 @@ export class DbService {
     let allTodos = [];
     data.forEach((doc) => {
       if (user.currentUser.uid === doc.data().userId) {
-        const { name } = doc.data();
-        const newElement = { id: doc.id, name };
+        const { name, done } = doc.data();
+        const newElement = { id: doc.id, name, done };
         allTodos = [...allTodos, newElement];
       }
     });
@@ -35,6 +36,7 @@ export class DbService {
         name: name,
         description: description,
         finishedDate: finishedDate.format("YYYY-MM-DD"),
+        done: false,
         userId: authService.getUserAuth().currentUser.uid,
       });
       return docRef;
@@ -47,5 +49,15 @@ export class DbService {
     const docRef = doc(this.db, "todos", selectedTodo);
     const docSnap = await getDoc(docRef);
     return docSnap.data();
+  };
+
+  updateTodo = async (todoUID, newName, newDesc, newDone, newFinishedDate) => {
+    const todoRef = doc(this.db, "todos", todoUID);
+    await updateDoc(todoRef, {
+      name: newName,
+      description: newDesc,
+      finishedDate: newFinishedDate,
+      done: newDone,
+    });
   };
 }

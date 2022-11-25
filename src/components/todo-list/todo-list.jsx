@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "../../css/todo-list/todo-list.css";
 import TodoItem from "../todo-item/todo-item";
 import { initDB } from "../..";
 import Spinner from "../spinner/spinner";
 
-const TodoList = ({ selectedTodo, setTodos, todos }) => {
+const TodoList = ({ selectTodo, localTodos }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [todos, setTodos] = useState([]);
+
   useEffect(() => {
+    if (localTodos.length === 0) {
+      return;
+    }
+    setIsLoading(true);
     initDB.getAllUserTodos().then((allTodos) => {
-      setIsLoading(false);
       setTodos(allTodos);
+      setIsLoading(false);
     });
-  }, [setTodos]);
+  }, [localTodos]);
 
   const deleteTodo = (id) => {
     initDB.deleteUserTodo(id);
@@ -32,7 +38,7 @@ const TodoList = ({ selectedTodo, setTodos, todos }) => {
             {...todo}
             key={todo.id}
             deleteTodo={deleteTodo}
-            selectedTodo={selectedTodo}
+            selectTodo={selectTodo}
           />
         );
       })}

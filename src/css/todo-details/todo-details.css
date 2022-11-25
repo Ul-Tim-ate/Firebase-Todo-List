@@ -40,11 +40,13 @@
   width: 100px;
   height: 100px;
   background-color: black;
-  cursor: pointer;
 }
 .todo-details__rewrite {
   position: absolute;
   top: 20px;
   right: 20px;
+}
+.todo-details__done {
+  margin-bottom: 10px;
 }
 /*# sourceMappingURL=todo-details.css.map */
