@@ -7,17 +7,20 @@ import Spinner from "../spinner/spinner";
 const TodoDetails = ({ selectedTodo }) => {
   const [fields, setFields] = useState(null);
   const [files, setFiles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const getData = async () => {
+    setLoading(true);
+    setFields(await initDB.getTodoDetails(selectedTodo));
+    setFiles(await initStorage.getTodoListFiles(selectedTodo));
+    setLoading(false);
+  };
 
   useEffect(() => {
-    initDB.getTodoDetails(selectedTodo).then((fields) => {
-      setFields(fields);
-    });
-    initStorage.getTodoListFiles(selectedTodo).then((filesTodo) => {
-      setFiles(filesTodo);
-    });
+    getData();
   }, [selectedTodo]);
 
-  if (!fields) {
+  if (loading) {
     return <Spinner />;
   }
 
