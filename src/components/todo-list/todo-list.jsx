@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/todo-list/todo-list.css";
 import TodoItem from "../todo-item/todo-item";
 import { initDB } from "../..";

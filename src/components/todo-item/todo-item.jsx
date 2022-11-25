@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import "../../css/todo-item/todo-item.css";
 import trash from "./trash.svg";
 

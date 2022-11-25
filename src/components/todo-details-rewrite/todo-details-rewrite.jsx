@@ -12,6 +12,7 @@ const TodoDetailsRewrite = ({
   setRewriteClick,
   todoUID,
   setLocalTodos,
+  setAfterSumit,
 }) => {
   const [addFiles, setAddFiles] = useState([]);
   const [newName, setNewName] = useState(name);
@@ -38,6 +39,7 @@ const TodoDetailsRewrite = ({
             };
           });
         });
+        setAfterSumit(true);
         setRewriteClick(false);
       });
   };

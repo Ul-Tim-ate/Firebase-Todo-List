@@ -11,6 +11,7 @@ const TodoDetails = ({ selectedTodo, setLocalTodos }) => {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [rewriteClick, setRewriteClick] = useState(false);
+  const [afterSubmit, setAfterSumit] = useState(false);
 
   const getData = async () => {
     setLoading(true);
@@ -27,8 +28,6 @@ const TodoDetails = ({ selectedTodo, setLocalTodos }) => {
   if (loading) {
     return <Spinner />;
   }
-
-  const { name, description, finishedDate, done } = fields;
   if (rewriteClick) {
     return (
       <TodoDetailsRewrite
@@ -37,9 +36,15 @@ const TodoDetails = ({ selectedTodo, setLocalTodos }) => {
         setRewriteClick={setRewriteClick}
         todoUID={selectedTodo}
         setLocalTodos={setLocalTodos}
+        setAfterSumit={setAfterSumit}
       />
     );
   }
+  if (afterSubmit) {
+    getData();
+    setAfterSumit(false);
+  }
+  const { name, description, finishedDate, done } = fields;
 
   return (
     <div className="todo-details">
