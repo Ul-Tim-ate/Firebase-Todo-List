@@ -1,42 +1,19 @@
 import dayjs from "dayjs";
-import React, { useContext, useState } from "react";
-import { DbContext } from "../..";
+import React, { useState } from "react";
+import { initDB, initStorage } from "../..";
 import "../../css/add-form/add-form.css";
-import { ref, uploadBytes } from "firebase/storage";
-import { getAuth } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
 
 const AddForm = ({ setTodos, todos }) => {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [finishedDate, setFinishedDate] = useState(dayjs());
   const [files, setFiles] = useState([]);
-  const { storage, db } = useContext(DbContext);
 
   const sumbit = async (e) => {
     e.preventDefault();
-    let docRef;
-    try {
-      docRef = await addDoc(collection(db, "todos"), {
-        name: name,
-        description: desc,
-        finishedDate: finishedDate.format("YYYY-MM-DD"),
-        userId: getAuth().currentUser.uid,
-      });
+    initDB.addTodo(name, desc, finishedDate).then((docRef) => {
+      initStorage.uploadFiles(files, docRef.id);
       setTodos([...todos, { name, id: docRef.id }]);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-    Array.from(files).forEach((file) => {
-      const fileName = file.name;
-      const userId = getAuth().currentUser.uid;
-      const path = userId + "/" + docRef.id + "/" + fileName;
-      const storageRef = ref(storage, path);
-
-      uploadBytes(storageRef, file).then((snapshot) => {
-        console.log(snapshot);
-        console.log("download");
-      });
     });
   };
 

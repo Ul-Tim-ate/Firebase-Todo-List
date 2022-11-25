@@ -1,10 +1,12 @@
-import React, { createContext } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./components/app/App";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { DbService } from "./services/db/db-service";
+import { StorageService } from "./services/storage/storage-service";
 
 const app = initializeApp({
   apiKey: "AIzaSyBYGOUoHh4rMUnVwdypcWtjesE8l3DQJFc",
@@ -17,13 +19,13 @@ const app = initializeApp({
 
 const db = getFirestore(app);
 const storage = getStorage(app);
-export const DbContext = createContext(null);
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+export const initDB = new DbService(db);
+export const initStorage = new StorageService(storage);
 
 root.render(
   <React.StrictMode>
-    <DbContext.Provider value={{ storage, db }}>
-      <App />
-    </DbContext.Provider>
+    <App />
   </React.StrictMode>
 );

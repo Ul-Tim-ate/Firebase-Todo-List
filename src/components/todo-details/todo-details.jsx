@@ -1,39 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
-import { DbContext } from "../..";
+import React, { useEffect, useState } from "react";
+import { initDB, initStorage } from "../..";
 import "../../css/todo-details/todo-details.css";
 import iconRewrite from "./rewrite.svg";
-import { doc, getDoc } from "firebase/firestore";
 import Spinner from "../spinner/spinner";
-import { ref, listAll } from "firebase/storage";
-import { getAuth } from "firebase/auth";
 
 const TodoDetails = ({ selectedTodo }) => {
-  const { db, storage } = useContext(DbContext);
   const [fields, setFields] = useState(null);
   const [files, setFiles] = useState([]);
 
   useEffect(() => {
-    const docRef = doc(db, "todos", selectedTodo);
-    const docSnap = getDoc(docRef).then((docSnap) => {
-      setFields(docSnap.data());
+    initDB.getTodoDetails(selectedTodo).then((fields) => {
+      setFields(fields);
     });
-    const listRef = ref(
-      storage,
-      `${getAuth().currentUser.uid}/${selectedTodo}`
-    );
-    listAll(listRef)
-      .then((res) => {
-        res.items.forEach((itemRef) => {
-          setFiles((files) => {
-            return [...files, itemRef];
-          });
-        });
-      })
-      .catch((error) => {});
-
-    return () => {
-      setFiles([]);
-    };
+    initStorage.getTodoListFiles(selectedTodo).then((filesTodo) => {
+      setFiles(filesTodo);
+    });
   }, [selectedTodo]);
 
   if (!fields) {
@@ -51,7 +32,11 @@ const TodoDetails = ({ selectedTodo }) => {
       <span className="todo-details__label">Файлы:</span>
       <ul className="todo-details__files">
         {files.map((file) => {
-          return <li className="todo-details__file">{file.name}</li>;
+          return (
+            <li className="todo-details__file" key={file.name}>
+              {file.name}
+            </li>
+          );
         })}
       </ul>
       <button className="todo-details__rewrite">
