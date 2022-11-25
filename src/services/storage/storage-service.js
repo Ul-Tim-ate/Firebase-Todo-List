@@ -1,4 +1,4 @@
-import { listAll, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
 import authService from "../auth/auth-service.js";
 
 export class StorageService {
@@ -30,5 +30,19 @@ export class StorageService {
       files.push(itemRef);
     });
     return files;
+  };
+
+  downloadFile = (path) => {
+    getDownloadURL(ref(this.storage, path)).then((url) => {
+      const xhr = new XMLHttpRequest();
+      xhr.responseType = "blob";
+      xhr.onload = (event) => {
+        const blob = xhr.response;
+        // файл скачивается, в preview видно, что это тот файл
+        // a с атрибутом download не работает, наверное потому что длинная ссылка
+      };
+      xhr.open("GET", url);
+      xhr.send();
+    });
   };
 }

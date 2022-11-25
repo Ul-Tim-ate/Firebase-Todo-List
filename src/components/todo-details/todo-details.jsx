@@ -3,6 +3,7 @@ import { initDB, initStorage } from "../..";
 import "../../css/todo-details/todo-details.css";
 import iconRewrite from "./rewrite.svg";
 import Spinner from "../spinner/spinner";
+import authService from "../../services/auth/auth-service";
 
 const TodoDetails = ({ selectedTodo }) => {
   const [fields, setFields] = useState(null);
@@ -35,9 +36,21 @@ const TodoDetails = ({ selectedTodo }) => {
       <span className="todo-details__label">Файлы:</span>
       <ul className="todo-details__files">
         {files.map((file) => {
+          const path =
+            authService.getUserAuth().currentUser?.uid +
+            "/" +
+            selectedTodo +
+            "/" +
+            file.name;
           return (
-            <li className="todo-details__file" key={file.name}>
-              {file.name}
+            <li
+              className="todo-details__file"
+              key={file.name}
+              onClick={() => {
+                initStorage.downloadFile(path);
+              }}
+            >
+            {file.name}
             </li>
           );
         })}

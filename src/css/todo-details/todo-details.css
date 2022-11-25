@@ -40,6 +40,7 @@
   width: 100px;
   height: 100px;
   background-color: black;
+  cursor: pointer;
 }
 .todo-details__rewrite {
   position: absolute;
