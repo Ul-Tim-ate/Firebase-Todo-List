@@ -18,10 +18,7 @@ export class StorageService {
       const path = userId + "/" + todoId + "/" + fileName;
       const storageRef = ref(this.storage, path);
 
-      uploadBytes(storageRef, file).then((snapshot) => {
-        console.log(snapshot);
-        console.log("download");
-      });
+      uploadBytes(storageRef, file);
     });
   };
   getTodoListFiles = async (selectedTodo) => {
@@ -41,7 +38,7 @@ export class StorageService {
       const xhr = new XMLHttpRequest();
       xhr.responseType = "blob";
       xhr.onload = (event) => {
-        const blob = xhr.response;
+        // const blob = xhr.response;
         // файл скачивается, в preview видно, что это тот файл
         // a с атрибутом download не работает, наверное потому что длинная ссылка
       };

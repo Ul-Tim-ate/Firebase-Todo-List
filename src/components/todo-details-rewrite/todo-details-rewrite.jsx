@@ -14,13 +14,13 @@ const TodoDetailsRewrite = ({
   setLocalTodos,
   setAfterSumit,
 }) => {
-  const [addFiles, setAddFiles] = useState([]);
   const [todoFiles, setTodoFiles] = useState(existFiles);
   const [newName, setNewName] = useState(name);
   const [newDesc, setNewDesc] = useState(description);
   const [newDone, setDone] = useState(done);
   const [newFinishedDate, setNewFinishedDate] = useState(finishedDate);
   const [deleteFiles, setDeleteFiles] = useState([]);
+  const [addFiles, setAddFiles] = useState([]);
 
   const rewriterSubmit = () => {
     initDB
@@ -47,6 +47,7 @@ const TodoDetailsRewrite = ({
     deleteFiles.forEach((file) => {
       initStorage.deleteFile(todoUID, file.name);
     });
+    initStorage.uploadFiles(addFiles, todoUID);
   };
 
   const deleteFileFromList = (name) => {
