@@ -1,4 +1,10 @@
-import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  listAll,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 import authService from "../auth/auth-service.js";
 
 export class StorageService {
@@ -18,7 +24,6 @@ export class StorageService {
       });
     });
   };
-
   getTodoListFiles = async (selectedTodo) => {
     const listRef = ref(
       this.storage,
@@ -31,7 +36,6 @@ export class StorageService {
     });
     return files;
   };
-
   downloadFile = (path) => {
     getDownloadURL(ref(this.storage, path)).then((url) => {
       const xhr = new XMLHttpRequest();
@@ -44,5 +48,15 @@ export class StorageService {
       xhr.open("GET", url);
       xhr.send();
     });
+  };
+  deleteFile = (todoUID, fileName) => {
+    const path =
+      authService.getUserAuth().currentUser.uid +
+      "/" +
+      todoUID +
+      "/" +
+      fileName;
+    const desertRef = ref(this.storage, path);
+    deleteObject(desertRef);
   };
 }

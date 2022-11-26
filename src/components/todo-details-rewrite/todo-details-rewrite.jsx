@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { initDB } from "../..";
+import { initDB, initStorage } from "../..";
 import "../../css/todo-details-rewrite/todo-details-rewrite.css";
-import cross from "./cross-svgrepo-com.svg";
+import RewriteFileList from "../rewrite-file-list/rewrite-file-list";
 
 const TodoDetailsRewrite = ({
   name,
@@ -15,10 +15,12 @@ const TodoDetailsRewrite = ({
   setAfterSumit,
 }) => {
   const [addFiles, setAddFiles] = useState([]);
+  const [todoFiles, setTodoFiles] = useState(existFiles);
   const [newName, setNewName] = useState(name);
   const [newDesc, setNewDesc] = useState(description);
   const [newDone, setDone] = useState(done);
   const [newFinishedDate, setNewFinishedDate] = useState(finishedDate);
+  const [deleteFiles, setDeleteFiles] = useState([]);
 
   const rewriterSubmit = () => {
     initDB
@@ -42,6 +44,24 @@ const TodoDetailsRewrite = ({
         setAfterSumit(true);
         setRewriteClick(false);
       });
+    deleteFiles.forEach((file) => {
+      initStorage.deleteFile(todoUID, file.name);
+    });
+  };
+
+  const deleteFileFromList = (name) => {
+    setDeleteFiles((delFiles) => {
+      const idx = todoFiles.findIndex((el) => el.name === name);
+      return [...delFiles, todoFiles[idx]];
+    });
+    setTodoFiles((todoFiles) => {
+      const idx = todoFiles.findIndex((el) => el.name === name);
+      const newTodos = [
+        ...todoFiles.slice(0, idx),
+        ...todoFiles.slice(idx + 1),
+      ];
+      return newTodos;
+    });
   };
 
   return (
@@ -114,16 +134,13 @@ const TodoDetailsRewrite = ({
       />
       <h3 className="todo-rewrite__files-header">Файлы</h3>
       <ul className="todo-rewrite__files">
-        {existFiles.map((file) => {
+        {todoFiles.map((file) => {
           return (
-            <li className="todo-rewrite__file" key={file.name}>
-              {file.name}
-              <img
-                src={cross}
-                alt="Удалить файл в todo"
-                className="todo-rewrite__cross"
-              />
-            </li>
+            <RewriteFileList
+              name={file.name}
+              deleteFileFromList={deleteFileFromList}
+              key={file.name}
+            />
           );
         })}
       </ul>
