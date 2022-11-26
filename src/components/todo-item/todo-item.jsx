@@ -5,10 +5,9 @@ import trash from "./trash.svg";
 
 const TodoItem = ({ name, id, deleteTodo, selectTodo, done, finishedDate }) => {
   const dateLabel = dayjs(finishedDate);
+  const currentDate = dayjs(dayjs().format("YYYY-MM-DD"));
   let addClasse;
-
-  
-  if (dateLabel.diff(dayjs()) < 0) {
+  if (dateLabel.diff(currentDate) < 0) {
     addClasse = "overdue";
   }
 
