@@ -1,0 +1,44 @@
+[debug] [2022-11-26T13:42:32.033Z] ----------------------------------------------------------------------
+[debug] [2022-11-26T13:42:32.035Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Timoh\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init hosting
+[debug] [2022-11-26T13:42:32.036Z] CLI Version:   11.16.1
+[debug] [2022-11-26T13:42:32.036Z] Platform:      win32
+[debug] [2022-11-26T13:42:32.036Z] Node Version:  v16.14.2
+[debug] [2022-11-26T13:42:32.037Z] Time:          Sat Nov 26 2022 16:42:32 GMT+0300 (Москва, стандартное время)
+[debug] [2022-11-26T13:42:32.037Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-26T13:42:32.109Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-26T13:42:32.109Z] > authorizing via signed-in user (timogochi1@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Timoh\Desktop\woman-up
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2022-11-26T13:42:36.367Z] Using project from CLI flag: fir-todolist-b4d54
+[debug] [2022-11-26T13:42:36.372Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/fir-todolist-b4d54 [none]
+[debug] [2022-11-26T13:42:36.673Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/fir-todolist-b4d54 200
+[debug] [2022-11-26T13:42:36.674Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/fir-todolist-b4d54 {"projectId":"fir-todolist-b4d54","projectNumber":"499869636150","displayName":"Firebase-ToDoList","name":"projects/fir-todolist-b4d54","resources":{"hostingSite":"fir-todolist-b4d54","storageBucket":"fir-todolist-b4d54.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_af229e42-5a6a-48bd-8c23-bfeba3326b4e"}
+[info] i  Using project fir-todolist-b4d54 (Firebase-ToDoList) 
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
