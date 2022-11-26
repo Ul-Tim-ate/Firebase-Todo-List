@@ -19,8 +19,8 @@ export class DbService {
     let allTodos = [];
     data.forEach((doc) => {
       if (user.currentUser.uid === doc.data().userId) {
-        const { name, done } = doc.data();
-        const newElement = { id: doc.id, name, done };
+        const { name, done, finishedDate } = doc.data();
+        const newElement = { id: doc.id, name, done, finishedDate };
         allTodos = [...allTodos, newElement];
       }
     });

@@ -1,10 +1,21 @@
+import dayjs from "dayjs";
 import React from "react";
 import "../../css/todo-item/todo-item.css";
 import trash from "./trash.svg";
 
-const TodoItem = ({ name, id, deleteTodo, selectTodo, done }) => {
+const TodoItem = ({ name, id, deleteTodo, selectTodo, done, finishedDate }) => {
+  const dateLabel = dayjs(finishedDate);
+  let addClasse;
+  if (dateLabel.isBefore(dayjs())) {
+    addClasse = "overdue";
+  }
+
+  if (done) {
+    addClasse = "done";
+  }
+  const classNameItem = "todo-item " + addClasse;
   return (
-    <li className="todo-item">
+    <li className={classNameItem}>
       <span
         className="todo-item__info"
         onClick={() => {
