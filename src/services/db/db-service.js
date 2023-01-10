@@ -11,11 +11,14 @@ import authService from "../auth/auth-service";
 
 export class DbService {
   constructor(db) {
+    console.log(db);
     this.db = db;
   }
+
   getAllUserTodos = async () => {
     const user = authService.getUserAuth();
     const data = await getDocs(collection(this.db, "todos"));
+    console.log(data);
     let allTodos = [];
     data.forEach((doc) => {
       if (user.currentUser.uid === doc.data().userId) {
@@ -26,6 +29,7 @@ export class DbService {
     });
     return allTodos;
   };
+
   deleteUserTodo = (todoUID) => {
     deleteDoc(doc(this.db, "todos", todoUID));
   };

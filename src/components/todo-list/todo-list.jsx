@@ -10,6 +10,7 @@ const TodoList = ({ selectTodo, localTodos }) => {
 
   useEffect(() => {
     if (localTodos.length === 0) {
+      setIsLoading(false);
       return;
     }
     setIsLoading(true);

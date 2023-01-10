@@ -9,12 +9,12 @@ import { DbService } from "./services/db/db-service";
 import { StorageService } from "./services/storage/storage-service";
 
 const app = initializeApp({
-  apiKey: "AIzaSyBYGOUoHh4rMUnVwdypcWtjesE8l3DQJFc",
-  authDomain: "fir-todolist-b4d54.firebaseapp.com",
-  projectId: "fir-todolist-b4d54",
-  storageBucket: "fir-todolist-b4d54.appspot.com",
-  messagingSenderId: "499869636150",
-  appId: "1:499869636150:web:159b228faeb670c5b0aa97",
+  apiKey: "AIzaSyCD48PCyEk8LwmpoiYF-8h80Scqbo0QwzE",
+  authDomain: "todos-4e9dc.firebaseapp.com",
+  projectId: "todos-4e9dc",
+  storageBucket: "todos-4e9dc.appspot.com",
+  messagingSenderId: "94786702204",
+  appId: "1:94786702204:web:2a89b4d43c1e79169732f9",
 });
 
 const db = getFirestore(app);
